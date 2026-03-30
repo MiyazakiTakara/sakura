@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --accent:  #7c3aed;
+  --bg:      #09090b;
+  --border:  #27272a;
+  --text:    #f4f4f5;
+  --muted:   #a1a1aa;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  height: 100%;
+  background: var(--bg);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-attachment: fixed;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Dekoracje ──────────────────────────────────────── */
+#sakura-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 2;
+}
+
+#fuji-bg {
+  position: fixed; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; max-width: 1000px;
+  pointer-events: none; z-index: 1;
+  opacity: 0.08;
+}
+
+/* ── Branding ──────────────────────────────────────── */
+#sakura-branding {
+  position: fixed; top: 20px; left: 24px;
+  z-index: 50; pointer-events: none;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.brand-main {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: #52525b;
+}
+.brand-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em;
+  color: #3f3f46;
+}
+
+#side-label {
+  position: fixed; left: 14px; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.3em;
+  color: #2d2d30; writing-mode: vertical-rl;
+  z-index: 20; pointer-events: none; user-select: none;
+}
+
+/* ── Layout ────────────────────────────────────────── */
+#page-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 6vw;
+  gap: 40px;
+  position: relative; z-index: 10;
+}
+
+/* ── Karta logowania ───────────────────────────────── */
+#login-card {
+  width: 100%;
+  max-width: 400px;
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 36px 32px;
+}
+
+/* ── Karta cytatów ────────────────────────────────── */
+#quote-card {
+  flex: 1;
+  max-width: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  opacity: 0;
+  animation: fadeIn 1.2s ease 0.4s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.quote-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.quote-jp {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 17px;
+  line-height: 1.9;
+  color: rgba(244,244,245,0.75);
+  letter-spacing: 0.12em;
+}
+
+.quote-en {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(161,161,170,0.55);
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+.quote-author {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: rgba(82,82,91,0.8);
+  text-transform: uppercase;
+}
+
+.quote-source {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(124,58,237,0.5);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.quote-source:hover {
+  color: rgba(167,139,250,0.8);
+}
+
+/* Ukryj kartę cytatów na małych ekranach */
+@media (max-width: 860px) {
+  #quote-card { display: none; }
+  #page-wrap { justify-content: center; }
+}
+
+/* ── Tytuł i labele — ukryte, zachowane odstępy ──────────── */
+#login-title {
+  font-size: 18px; font-weight: 700;
+  color: transparent;
+  margin-bottom: 24px;
+  user-select: none; pointer-events: none;
+}
+
+label {
+  display: block;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  color: transparent;
+  margin-bottom: 6px;
+  user-select: none; pointer-events: none;
+}
+
+/* ── Pola ──────────────────────────────────────────── */
+.field { margin-bottom: 16px; }
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  display: block; width: 100%;
+  background: rgba(9,9,11,0.6);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(124,58,237,0.15);
+}
+
+input::placeholder { color: #52525b; }
+
+/* ── Remember + forgot ─────────────────────────────── */
+.form-row {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px; font-size: 13px;
+}
+.checkbox-label {
+  display: flex; align-items: center; gap: 6px;
+  cursor: pointer; font-size: 13px;
+  font-weight: 400; text-transform: none;
+  letter-spacing: 0; color: var(--muted);
+}
+input[type="checkbox"] { accent-color: var(--accent); }
+
+/* ── Przycisk ───────────────────────────────────────── */
+input[type="submit"] {
+  display: block; width: 100%;
+  background: var(--accent);
+  border: none; border-radius: 8px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 600;
+  padding: 11px; cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+input[type="submit"]:hover {
+  background: #6d28d9;
+  box-shadow: 0 0 24px rgba(124,58,237,0.4);
+  transform: translateY(-1px);
+}
+
+/* ── Linki ─────────────────────────────────────────── */
+a, a:visited { color: #a78bfa; text-decoration: none; }
+a:hover { color: #c4b5fd; text-decoration: underline; }
+
+/* ── Alerty ───────────────────────────────────────── */
+.alert { border-radius: 8px; padding: 10px 14px; font-size: 13px; margin-bottom: 16px; }
+.alert-error { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); color: #fca5a5; }
+.alert-info, .alert-warning { background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.2); color: #67e8f9; }
+
+/* ── Social ────────────────────────────────────────── */
+.social-divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 20px 0 16px; font-size: 11px;
+  color: #52525b; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.social-divider::before, .social-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.social-btn {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(18,18,20,0.4); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text) !important;
+  font-size: 13px; padding: 9px 14px; margin-bottom: 8px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.social-btn:hover { border-color: var(--accent); background: rgba(124,58,237,0.08); text-decoration: none !important; }
+
+/* ── Rejestracja ───────────────────────────────────── */
+.register-row {
+  text-align: center; margin-top: 20px;
+  padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);
+  font-size: 13px; color: #71717a;
+}
+
+/* ── Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #52525b; }
